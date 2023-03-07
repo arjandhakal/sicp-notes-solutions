@@ -1,0 +1,34 @@
+#lang sicp
+(#%require rackunit)
+
+
+(define (smallest-divisor n)
+  (find-divisor n 2))
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n)
+         n)
+        ((divides? test-divisor n)
+         test-divisor)
+        (else (find-divisor
+               n
+               (+ test-divisor 1)))))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+
+
+; Exercise 1.33
+(define (filter combiner null-value term a next b filter)
+  (if (> a b)
+      null-value
+      (if (filter a)
+          (combiner (term a) (filter combiner null-value term (next a) b filter))
+          (filter combiner null-value term (next a) b filter))))
+
+
+; Exercise 1.33.1
+
+  
+
